@@ -1,0 +1,239 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ */
+package View.TrangChu;
+
+
+import Repository.KhachHangRepository;
+import Repository.TrangChuRepository;
+import Service.Impl.TrangChuImpl;
+import Services.TrangChuService;
+import View.form.ModelNoticeBoard;
+import View.icon.GoogleMaterialDesignIcons;
+import View.icon.IconFontSwing;
+import ViewModel.KhachHangTrangHangViewModel;
+
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.Icon;
+import javax.swing.table.DefaultTableModel;
+
+/**
+ *
+ * @author ADMIN
+ */
+public class home extends javax.swing.JPanel {
+
+    TrangChuService trangchuService = new TrangChuImpl();
+    DefaultTableModel tbl_model = new DefaultTableModel();
+    List<KhachHangTrangHangViewModel> listKhachHang = new ArrayList<>();
+    
+    public home() {
+        initComponents();
+        initNoticeBoard();
+        initCardData();
+        tbl_khachHang.fixTable(jScrollPane1);
+        setOpaque(false);
+        tbl_model = (DefaultTableModel) tbl_khachHang.getModel();
+        listKhachHang = trangchuService.getlistKhachHang();
+        filldata();
+        
+    }
+    public  void filldata(){
+        tbl_model.setRowCount(0);
+        for (KhachHangTrangHangViewModel kh : listKhachHang) {
+            tbl_model.addRow(new Object[]{
+                kh.getTen(),kh.isGioiTinh() == true?"Nam":"Nữ",kh.getSoDienThoai(),kh.getSoluong()
+            });
+        }
+    }
+    private void initCardData() {
+        Icon icon1 = IconFontSwing.buildIcon(GoogleMaterialDesignIcons.PEOPLE, 60, new Color(255, 255, 255, 100), new Color(255, 255, 255, 15));
+        card1.setData(new ModelCard("Tổng khách hàng", trangchuService.getTongKhachHang(), 20, icon1));
+        Icon icon2 = IconFontSwing.buildIcon(GoogleMaterialDesignIcons.MONETIZATION_ON, 60, new Color(255, 255, 255, 100), new Color(255, 255, 255, 15));
+        card2.setData(new ModelCard("Doanh thu/Ngày", trangchuService.getTongDoanhTHu(), 60, icon2));
+        Icon icon3 = IconFontSwing.buildIcon(GoogleMaterialDesignIcons.SHOPPING_BASKET, 60, new Color(255, 255, 255, 100), new Color(255, 255, 255, 15));
+        card3.setData(new ModelCard("Sản phẩm / Ngày", trangchuService.getTongSanPham(), 80, icon3));
+        Icon icon4 = IconFontSwing.buildIcon(GoogleMaterialDesignIcons.BUSINESS_CENTER, 60, new Color(255, 255, 255, 100), new Color(255, 255, 255, 15));
+        card4.setData(new ModelCard("Tồn kho", trangchuService.getTongTonKho(), 95, icon4));
+    }
+    private void initNoticeBoard() {
+        noticeBoard.addDate("Quy định mua hàng của shop");
+        noticeBoard.addNoticeBoard(new View.login.ModelNoticeBoard(new Color(94, 49, 238), "Lưu ý", "Now", "Bạn đặt hàng vui lòng kiểm tra kỹ lại thông tin sản phẩm: Tên Sách, Nhà Xuất Bản, Ngôn Ngữ, Tác Giả"));
+        noticeBoard.addNoticeBoard(new View.login.ModelNoticeBoard(new Color(218, 49, 238), "Thời gian làm việc", "2h ago", "Thời gian mở cửa shop từ 6h00 tới 23h00. Làm việc cả thứ bảy và chủ nhật"));
+        noticeBoard.addNoticeBoard(new View.login.ModelNoticeBoard(new Color(255, 51, 0), "Chính sách đổi trả", "2h ago", "Khi khách hàng gặp sự cố về sản phẩm lỗi bên shop như sản phẩm không vừa, hỏng, lỗi... Thời gian đổi trả trong vòng 2 ngày. Chi tiết liên hệ 0123456789"));
+
+        noticeBoard.addDate("Hướng dẫn sử dụng phần mềm Nhà Sách");
+        noticeBoard.addNoticeBoard(new View.login.ModelNoticeBoard(new Color(32, 171, 43), "Further Reading", "12:30 PM", "There are more information to digest regarding MigLayout. The resources are all available at www.migcomponents.com"));
+        noticeBoard.addNoticeBoard(new View.login.ModelNoticeBoard(new Color(50, 93, 215), "Span", "10:30 AM", "Spans the current cell (merges) over a number of cells. Practically this means that this cell and the count number of cells will be treated as one cell and the component can use the space that all these cells have."));
+        noticeBoard.addNoticeBoard(new View.login.ModelNoticeBoard(new Color(27, 188, 204), "Skip ", "9:00 AM", "Skips a number of cells in the flow. This is used to jump over a number of cells before the next free cell is looked for. The skipping is done before this component is put in a cell and thus this cells is affected by it. \"count\" defaults to 1 if not specified."));
+        noticeBoard.addNoticeBoard(new View.login.ModelNoticeBoard(new Color(238, 46, 57), "Push", "7:15 AM", "Makes the row and/or column that the component is residing in grow with \"weight\". This can be used instead of having a \"grow\" keyword in the column/row constraints."));
+        noticeBoard.scrollToTop();
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_khachHang = new View.form.Table01();
+        jPanel2 = new javax.swing.JPanel();
+        noticeBoard = new View.form.Notice();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        card1 = new View.TrangChu.Card();
+        card4 = new View.TrangChu.Card();
+        card3 = new View.TrangChu.Card();
+        card2 = new View.TrangChu.Card();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("Danh Sách Khách Hàng");
+
+        tbl_khachHang.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Tên", "Giới Tính ", "Số Điện Thoại", "Số Lượng Mua Hàng"
+            }
+        ));
+        jScrollPane1.setViewportView(tbl_khachHang);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel1)
+                .addContainerGap(727, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1)
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setText("Note");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setText("Welcome to shop");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(noticeBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(noticeBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(94, 94, 94))
+        );
+
+        card1.setBackground(new java.awt.Color(0, 102, 255));
+        card1.setColorGradient(new java.awt.Color(204, 0, 204));
+
+        card4.setBackground(new java.awt.Color(204, 204, 0));
+        card4.setColorGradient(new java.awt.Color(204, 0, 204));
+
+        card3.setBackground(new java.awt.Color(102, 255, 255));
+        card3.setColorGradient(new java.awt.Color(153, 0, 153));
+
+        card2.setBackground(new java.awt.Color(255, 0, 102));
+        card2.setColorGradient(new java.awt.Color(153, 153, 255));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(card1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(card2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(card3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(card4, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(card3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(card2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(card4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(card1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(74, Short.MAX_VALUE))
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private View.TrangChu.Card card1;
+    private View.TrangChu.Card card2;
+    private View.TrangChu.Card card3;
+    private View.TrangChu.Card card4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private View.form.Notice noticeBoard;
+    private View.form.Table01 tbl_khachHang;
+    // End of variables declaration//GEN-END:variables
+}
